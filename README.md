@@ -58,7 +58,7 @@ sudo systemctl start ssh
 Don't forget to update your Raspbian install:
 
 ```sh
-sudo apt update && sudo apt upgrade
+sudo apt-get update && sudo apt-get dist-upgrade
 ```
 
 ## Usage
@@ -71,4 +71,19 @@ ssh pi@localhost -p 5022
 
 That's it! You can now access the emulated machine's bash.
 
-![pi.png]
+![pi.png](https://raw.githubusercontent.com/czonios/RPi-sim/master/pi.png)
+
+<!-- ### Resizing the image
+
+If you find you need more space in your Raspbian image, you can use the following steps:
+
+* Check available space using
+```sh
+df -h
+```
+
+* Resize the image
+
+```sh
+qemu-img resize <img-file> +10G
+``` -->
