@@ -1,5 +1,7 @@
 # Raspberry Pi Emulation
 
+![pi.png](./pi.png)
+
 ## Installation
 
 ### Required Packages
@@ -70,8 +72,6 @@ ssh pi@localhost -p 5022
 ```
 
 That's it! You can now access the emulated machine's bash.
-
-![pi.png](https://raw.githubusercontent.com/czonios/RPi-sim/master/pi.png)
 
 <!-- ### Resizing the image
 
