@@ -34,8 +34,12 @@ if [ ! -f "$RPI_FS" ]; then
 fi
 
 $QEMU -kernel ${RPI_KERNEL_FILE} \
-    -cpu arm1176 -m 256 -M versatilepb \
-    -dtb ${PTB_FILE} -no-reboot \
-    -serial stdio -append "root=/dev/sda2 panic=1 rootfstype=ext4 rw" \
+    -cpu arm1176 \
+    -m 256 \
+    -M versatilepb \
+    -dtb ${PTB_FILE} \
+    -no-reboot \
+    -serial stdio \
+    -append "root=/dev/sda2 panic=1 rootfstype=ext4 rw" \
     -drive "file=${RPI_FS},index=0,media=disk,format=raw" \
     -net user,hostfwd=tcp::5022-:22 -net nic

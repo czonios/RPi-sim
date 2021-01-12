@@ -1,6 +1,16 @@
-# Raspberry Pi Emulation
+# Raspberry Pi Emulation Using QEMU
+
+> Set up and access a Raspbian Lite image on an emulator
 
 ![pi.png](./pi.png)
+
+- [Raspberry Pi Emulation Using QEMU](#raspberry-pi-emulation-using-qemu)
+  - [Installation](#installation)
+    - [Required Packages](#required-packages)
+    - [Check supported ARM machines and CPUs for each machine](#check-supported-arm-machines-and-cpus-for-each-machine)
+    - [Emulate a Raspbian Lite image](#emulate-a-raspbian-lite-image)
+  - [Usage](#usage)
+    - [SSH to the emulated machine from host machine](#ssh-to-the-emulated-machine-from-host-machine)
 
 ## Installation
 
@@ -10,6 +20,12 @@ Arch Linux:
 
 ```sh
 sudo pacman -S qemu qemu-arch-extra bridge-utils
+```
+
+Ubuntu / Linux Mint / Debian / Pop!\_OS:
+
+```sh
+sudo apt-get install qemu-system
 ```
 
 ### Check supported ARM machines and CPUs for each machine
@@ -24,22 +40,27 @@ qemu-system-arm -M versatilepb -cpu '?'
 You can run the included bash script:
 
 ```sh
-bash create-lite-setup.sh
+bash create-run-lite.sh
 ```
 
-The script fetches an open source qemu kernel for the Raspberry Pi, as well as a board-specific device tree (DTB). Afterwards it downloads an image of Raspbian Buster Lite, and finally executes the QEMU emulator.
+The script works in 4 distinct parts:
+
+1. checks for and fetches an open source qemu kernel for the Raspberry Pi
+2. checks for and fetches a board-specific device tree (DTB)
+3. checks for and downloads an image of Raspbian Buster Lite
+4. executes the QEMU emulator
 
 The emulation parameters are as follows:
 
 ```sh
 qemu-system-arm
     -kernel ${RPI_KERNEL_FILE} \    # specify kernel file
-    -cpu arm1176                    # use ARM 1176 as CPU
-    -m 256                          # 256MB memory
+    -cpu arm1176 \                  # use ARM 1176 as CPU
+    -m 256 \                        # 256MB memory
     -M versatilepb \                # versatilepb machine
-    -dtb ${PTB_FILE}                # device tree file
+    -dtb ${PTB_FILE} \              # device tree file
     -no-reboot \
-    -serial stdio
+    -serial stdio \
     -append "root=/dev/sda2 panic=1 rootfstype=ext4 rw" \
     -drive "file=${RPI_FS},index=0,media=disk,format=raw" \ # boot from downloaded image
     -net user,hostfwd=tcp::5022-:22 -net nic                # enable networking and set port to 5022 for SSH
@@ -71,7 +92,9 @@ sudo apt-get update && sudo apt-get dist-upgrade
 ssh pi@localhost -p 5022
 ```
 
-That's it! You can now access the emulated machine's bash.
+That's it! You can now access the emulated machine.
+
+![screenshot.png](./screenshot.png)
 
 <!-- ### Resizing the image
 
