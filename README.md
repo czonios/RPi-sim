@@ -14,6 +14,13 @@
 
 ## Installation
 
+download the [latest release](https://github.com/czonios/RPi-sim/releases/latest) including a working Raspbian Lite image, or clone the code from the GitHub repository:
+
+```sh
+git clone https://github.com/czonios/RPi-sim.git
+cd RPi-sim
+```
+
 ### Required Packages
 
 Arch Linux:
