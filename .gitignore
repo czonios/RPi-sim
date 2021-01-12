@@ -2,3 +2,5 @@
 *.zip
 */**/kernel-*
 *.dtb
+README.pdf
+rpi-qemu.pdf
